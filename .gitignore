@@ -1,0 +1,32 @@
+# Dependencies and build output
+node_modules
+dist
+*.local
+
+# Environment files with real secrets — NEVER commit these
+.env
+.env.*
+!.env.example
+!.env.production.example
+!.env.database.example
+supabase/.env
+supabase/functions/.env
+
+# Supabase CLI local state
+supabase/.temp
+supabase/.branches
+
+# Test output
+playwright-report
+test-results
+coverage
+
+# Editors / OS
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.log
+
+# Packaged copies of the project
+*.zip

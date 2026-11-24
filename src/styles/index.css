@@ -1,0 +1,130 @@
+@import 'tailwindcss';
+
+/*
+  Design tokens. Change these to rebrand the whole app.
+  Neutrals: cream = page background, paper = surfaces, sand = borders and
+  quiet fills, stone = secondary text, ink = main text (deep brown-black).
+  Brand colours:
+    brown   = primary (main buttons, selected states)
+    fuchsia = highlight (booking call-to-action, ratings, unread dots)
+    green   = success, verified, stylist banner
+    blue    = links, keyboard focus, information
+  Every text/background pair used in the app meets WCAG AA contrast (4.5:1).
+*/
+@theme {
+  --color-cream: #f7f3ee;
+  --color-paper: #ffffff;
+  --color-ink: #2b211c;
+  --color-ink-soft: #45382f;
+  --color-stone: #6b6058;
+  --color-sand: #e6dcd0;
+  --color-sand-soft: #f0e9e0;
+
+  --color-brown: #7a5236;
+  --color-brown-deep: #5a3a26;
+  --color-brown-soft: #f0e5da;
+
+  --color-fuchsia: #b8247c;
+  --color-fuchsia-deep: #931c63;
+  --color-fuchsia-soft: #f8e3ef;
+
+  --color-green: #4f7255;
+  --color-green-deep: #3a5a41;
+  --color-green-soft: #e4ede3;
+
+  --color-blue: #2f6290;
+  --color-blue-deep: #244d73;
+  --color-blue-soft: #e1eaf3;
+
+  /* Status colours reuse the brand palette where it fits */
+  --color-success: #3a5a41;
+  --color-success-soft: #e4ede3;
+  --color-info: #244d73;
+  --color-info-soft: #e1eaf3;
+  --color-danger: #a23b2a;
+  --color-danger-soft: #f8e4df;
+  --color-warn: #8a5a12;
+  --color-warn-soft: #fbefd9;
+
+  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-sans: 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --radius-media: 1.25rem;
+  --radius-panel: 0.875rem;
+  --radius-control: 0.625rem;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-cream font-sans text-ink antialiased;
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-display text-ink;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-blue-deep);
+    outline-offset: 2px;
+  }
+  ::selection {
+    background: var(--color-fuchsia-soft);
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6;
+  }
+  .panel {
+    @apply rounded-[var(--radius-panel)] border border-sand bg-paper;
+  }
+  .label {
+    @apply mb-1.5 block text-sm font-medium text-ink-soft;
+  }
+  .control {
+    @apply w-full rounded-[var(--radius-control)] border border-sand bg-paper px-3.5 py-2.5 text-ink placeholder:text-stone/70
+      transition-colors focus:border-blue focus:outline-none focus:ring-2 focus:ring-blue-soft disabled:bg-sand-soft disabled:text-stone;
+  }
+  .control-error {
+    @apply border-danger focus:border-danger focus:ring-danger-soft;
+  }
+  .link {
+    @apply font-medium text-blue-deep underline-offset-4 hover:underline;
+  }
+  .prose-legal h2 {
+    @apply mt-8 mb-2 text-xl;
+  }
+  .prose-legal p,
+  .prose-legal li {
+    @apply mb-3 max-w-[70ch] text-ink-soft;
+  }
+  .prose-legal ul {
+    @apply list-disc pl-6;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: white;
+  }
+}
